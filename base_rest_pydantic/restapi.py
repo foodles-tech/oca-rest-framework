@@ -48,7 +48,7 @@ class PydanticModel(restapi.RestMethodParam):
         to_validate = (
             json_dict if not result.__config__.orm_mode else result.dict(by_alias=True)
         )
-        *_, validation_error = validate_model(self._model_cls, to_validate)
+        *_ignored, validation_error = validate_model(self._model_cls, to_validate)
         if validation_error:
             raise SystemError(_("Invalid Response %s") % validation_error)
         return json_dict
